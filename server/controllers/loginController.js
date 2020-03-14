@@ -5,7 +5,6 @@ const dbConnection = require("../database/DBConnection");
 module.exports = {
 	checkLogin: (req, res) => {
 		let query = "SELECT * FROM tbl_user WHERE userName = ? AND password = ?";
-		console.log(req.body);
 		dbConnection.query(
 			query,
 			[req.body.userName, req.body.password],
