@@ -2,17 +2,16 @@
 
 require("dotenv").config();
 const express = require("express");
-const routes = require("./routes/routes");
+const bodyparser = require("body-parser");
+const routes = require("./server/routes/routes");
 const app = express();
-// -------------------------------------- 
-app.use(express.json());
 
 // --------------------------------------
-routes(app);
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use("/api/", routes);
 
 // --------------------------------------
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-	console.log(`Port ${PORT} running...`);
+app.listen(process.env.PORT || 3000, () => {
+	console.log(`Port ${process.env.PORT || 3000} running...`);
 });
